@@ -42,26 +42,17 @@ public class Kmeans {
 		// 查看每个点的所属聚类标号
 		System.out.print("The labels of points is: ");
 		
-		for (int i =0; i<data.labels.length; i++) {
+		for (int i = 0; i< docs.size(); i++) {
 			try {
 				int docPos = Integer.parseInt(docs.get(i).get(0));
-				if (i == docPos)
-					map.put(i, data.labels[i]);
+				map.put(docPos, data.labels[docPos]);
+				System.out.print(docPos +":" + data.labels[docPos]+"    ");
 			}
 			catch(Exception e) {
-				//String temp = doc.get(0);
+				//String temp = docs.get(i).get(0);
 				System.out.print("error");
 			}
 		}
-		
-		
-		for (int i =0; i<data.labels.length; i++) {
-			System.out.print(i +":" + data.labels[i]+"    ");
-		}
-		for (int lable : data.labels) {
-			System.out.print(lable + "  ");
-		}		
-		System.out.print("stop");
 		return map;
 	}
 }

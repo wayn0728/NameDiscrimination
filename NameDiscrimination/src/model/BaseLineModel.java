@@ -63,6 +63,9 @@ public class BaseLineModel {
 	
 	private void repFeature(List<List<String>> docs) {
 		docsArray = new double[docs.size()+1][features.size()];
+//		for (int i = 0; i < docsArray.length; i++)
+//				docsArray[i][0] = -1;
+		
 		for (List<String> doc : docs) {
 			try {
 				int docPos = Integer.parseInt(doc.get(0));
@@ -78,6 +81,7 @@ public class BaseLineModel {
 			}
 			catch(Exception e) {
 				String temp = doc.get(0);
+				e.printStackTrace();
 				System.out.print("stop");
 			}
 		}
