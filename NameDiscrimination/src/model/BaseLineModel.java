@@ -30,7 +30,6 @@ public class BaseLineModel {
 		    List<List<String>> docs = (List<List<String>>)entry.getValue(); 
 		    oneRes = clusterOneName(name,docs);
 		    produce(oneRes);
-		    // res.put(name, oneRes);
 		} 
 	}
 
