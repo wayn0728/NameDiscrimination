@@ -14,7 +14,6 @@ import org.w3c.dom.NodeList;
 
 public class XMLParser {
 	public void parsersXml() {
-		// 实例化一个文档构建器工厂
 		DocumentBuilderFactory dbf = DocumentBuilderFactory.newInstance();
 		try {
 			DocumentBuilder db = dbf.newDocumentBuilder();
