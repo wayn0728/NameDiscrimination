@@ -6,6 +6,8 @@ import java.util.List;
 import java.util.Map;
 import java.util.Iterator;
 
+import parser.XMLParser;
+
 import cluster.Kmeans;
 
 
@@ -23,26 +25,31 @@ public class BaseLineModel {
 	public void cluster(HashMap<String, List> fileMap) {
 		Iterator iter = fileMap.entrySet().iterator(); 
 		String name = null;
-		HashMap<Integer,Integer> oneRes = new HashMap<Integer,Integer>();
+		
 		while (iter.hasNext()) { 
 		    Map.Entry entry = (Map.Entry) iter.next(); 
 		    name = (String)entry.getKey(); 
 		    List<List<String>> docs = (List<List<String>>)entry.getValue(); 
-		    oneRes = clusterOneName(name,docs);
-		    produce(oneRes);
+		    clusterOneName(name,docs);
 		} 
 	}
 
-	private void produce(HashMap<Integer, Integer> oneRes) {
-		// TODO Auto-generated method stub
-		
+	private void generateXML(String name, HashMap<Integer, Integer> oneRes) {
+		XMLParser xmlParser = new XMLParser();
+		xmlParser.generateXml(name, oneRes);
 	}
 
-	private HashMap<Integer,Integer> clusterOneName(String name, List<List<String>> docs) {
+	private  void clusterOneName(String name, List<List<String>> docs) {
+		
 		extractFeature(docs);
+		
 		repFeature(docs);
+		
 		Kmeans kmeans= new Kmeans();
-		return kmeans.cluster(docsArray,docs);
+		HashMap<Integer,Integer> oneRes = new HashMap<Integer,Integer>();
+		oneRes = kmeans.cluster(docsArray,docs);
+		
+		generateXML(name, oneRes);
 	}
 
 	private void extractFeature(List<List<String>> docs) {
