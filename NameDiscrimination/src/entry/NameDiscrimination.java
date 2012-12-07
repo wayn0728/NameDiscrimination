@@ -8,7 +8,7 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.util.HashMap;
 import java.util.List;
-import model.BaseLineModel;
+import model.*;
 
 import parser.HTMLParser;
 
@@ -24,7 +24,10 @@ public class NameDiscrimination {
 	public static void main(String[] args) {
 		fileMap = readHTML();
 		BaseLineModel model = new BaseLineModel();
-		model.cluster(fileMap);
+		TFIDFModel tfidfModel = new TFIDFModel();
+		
+		//model.cluster(fileMap);
+		tfidfModel.cluster(fileMap);
 		//readXML();
 	}
 
@@ -33,6 +36,7 @@ public class NameDiscrimination {
 		return htmlParser.parse(path);
 		
 	}
+
 
 	private static void readXML() {
 
