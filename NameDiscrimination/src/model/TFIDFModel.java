@@ -84,6 +84,17 @@ public class TFIDFModel {
 		*/
 		
 		//PCA and building kmeans Array start from HERE!!!
+		//filling in docarray
+		docsArray=new double[docs.size()][tfidf.size()];
+		for (int i = 0; i<biDocs.size();i++) {
+			List<List<String>> biDoc=new ArrayList<List<String>>();
+			biDoc=biDocs.get(i);
+			for(List<String> bigram : biDoc){
+				int featurePos = features.get(bigram)[0];
+				double tfidfValue=tfidf.get(bigram)[1];
+				docsArray[i][featurePos] = tfidfValue;
+			}			
+		}
 		
 		Kmeans kmeans= new Kmeans();
 		HashMap<Integer,Integer> oneRes = new HashMap<Integer,Integer>();
@@ -141,5 +152,11 @@ public class TFIDFModel {
 		return biDocs;
 	}
 	
-
+	private void repFeature(List<List<List<String>>> biDocs) {
+		docsArray = new double[biDocs.size()+1][features.size()];
+//		for (int i = 0; i < docsArray.length; i++)
+//				docsArray[i][0] = -1;
+		
+		
+	}
 }
