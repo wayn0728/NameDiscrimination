@@ -27,7 +27,7 @@ public class NameDiscrimination {
 		TFIDFModel tfidfModel = new TFIDFModel();
 		
 		//model.cluster(fileMap);
-		tfidfModel.cluster(fileMap);
+		model.cluster(fileMap);
 		//readXML();
 	}
 

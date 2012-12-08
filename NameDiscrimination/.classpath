@@ -4,5 +4,6 @@
 	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER/org.eclipse.jdt.internal.debug.ui.launcher.StandardVMType/JavaSE-1.7"/>
 	<classpathentry kind="lib" path="/Users/Wayne/Work/workspace/NameDiscrimination/NameDiscrimination/lib/jericho-html-3.3.jar"/>
 	<classpathentry kind="lib" path="/Users/Wayne/Work/workspace/NameDiscrimination/NameDiscrimination/lib/kmeans.jar"/>
+	<classpathentry kind="lib" path="/Users/Wayne/Work/workspace/NameDiscrimination/NameDiscrimination/lib/Jama-1.0.3.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>
