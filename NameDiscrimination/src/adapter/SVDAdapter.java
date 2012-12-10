@@ -4,37 +4,42 @@ import Jama.Matrix;
 import Jama.SingularValueDecomposition;
 
 public class SVDAdapter {
+	
 
 	
 	public static void main(String[] args) {
-		// create M-by-N matrix that doesn't have full rank
-	      int M = 8, N = 5;
-	      Matrix B = Matrix.random(5, 3);
-	      Matrix A = Matrix.random(M, N).times(B).times(B.transpose());
-	      System.out.print("A = ");
-	      A.print(9, 6);
+		
+	}
 
-	      // compute the singular vallue decomposition
-	      System.out.println("A = U S V^T");
-	      System.out.println();
-	      SingularValueDecomposition s = A.svd();
-	      System.out.print("U = ");
-	      Matrix U = s.getU();
-	      U.print(9, 6);
-	      System.out.print("Sigma = ");
-	      Matrix S = s.getS();
-	      S.print(9, 6);
-	      System.out.print("V = ");
-	      Matrix V = s.getV();
-	      V.print(9, 6);
-	      System.out.println("rank = " + s.rank());
-	      System.out.println("condition number = " + s.cond());
-	      System.out.println("2-norm = " + s.norm2());
-
-	      // print out singular values
-	      System.out.print("singular values = ");
-	      Matrix svalues = new Matrix(s.getSingularValues(), 1);
-	      svalues.print(9, 6);
+	public double[][] decompose(double[][] rawFeature) {
+		Matrix A = new Matrix(rawFeature);
+		int reducedDimension = 0;
+		if (A.getColumnDimension() > 3000)
+			reducedDimension = 300;
+		else reducedDimension /= 10;
+		int[] k = new int[reducedDimension];
+		for (int i = 0; i< reducedDimension; i++)
+			k[i] = i;
+		
+		SingularValueDecomposition s = A.svd();
+		Matrix U = s.getU();
+		Matrix reducedU = U.getMatrix(0,U.getRowDimension()-1,k);
+		Matrix S = s.getS();
+		Matrix reducedS = S.getMatrix(k, k);
+		Matrix V = s.getV();
+		Matrix reducedV = S.getMatrix(k,0,V.getColumnDimension()-1);
+		Matrix newM = reducedU.times(reducedS).times(reducedV);
+		newM = newM.getMatrix(0,U.getRowDimension()-1,k);
+		double[][] res = newM.getArray();
+//		double[] sum = new double[newM.getColumnDimension()];
+//		for (int i = 0; i < res.length; i++) {
+//			for (int j = 0; j < res[i].length; j++) {
+//				sum[j] += res[i][j];
+//			}
+//		}
+//		for (int i= 0; i<sum.length; i++)
+//			sum[i] /= res.length;
+		return res;
 	}
 
 }

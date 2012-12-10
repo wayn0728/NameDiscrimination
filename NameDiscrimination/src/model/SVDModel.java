@@ -6,6 +6,8 @@ import java.util.List;
 import java.util.Map;
 import java.util.Iterator;
 
+import adapter.SVDAdapter;
+
 import parser.XMLParser;
 
 import cluster.Kmeans;
@@ -56,7 +58,7 @@ public class SVDModel {
 		features = new HashMap<List<String>, Integer>();
 		int indice = 0;
 		for (List<String> doc: docs) {
-			for (int i = 1; i< doc.size() - 1; i++) {
+			for (int i = 1; i< doc.size()-1; i++) {
 				String first = doc.get(i);
 				String second = doc.get(i+1);
 				List<String> bigram = new ArrayList<String>();
@@ -72,11 +74,12 @@ public class SVDModel {
 		docsArray = new double[docs.size()+1][features.size()];
 //		for (int i = 0; i < docsArray.length; i++)
 //				docsArray[i][0] = -1;
-		
+		int count = 0;
 		for (List<String> doc : docs) {
+			System.out.println(count++);
 			try {
 				int docPos = Integer.parseInt(doc.get(0));
-				for (int i = 1; i< doc.size() - 1; i++) {
+				for (int i = 1; i< doc.size()-1; i++) {
 					String first = doc.get(i);
 					String second = doc.get(i+1);
 					List<String> bigram = new ArrayList<String>();
@@ -92,6 +95,8 @@ public class SVDModel {
 				System.out.print("stop");
 			}
 		}
+		SVDAdapter svdAdapter = new SVDAdapter();
+		docsArray = svdAdapter.decompose(docsArray);
 	}
 
 }

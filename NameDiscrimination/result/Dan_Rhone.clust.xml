@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <clustering name="Dan_Rhone">
 <entity id="0">
-<doc rank="2"/>
-</entity>
-<entity id="1">
 <doc rank="0"/>
 <doc rank="1"/>
 <doc rank="3"/>
+</entity>
+<entity id="1">
+<doc rank="2"/>
 </entity>
 </clustering>

@@ -25,9 +25,9 @@ public class NameDiscrimination {
 		fileMap = readHTML();
 		BaseLineModel model = new BaseLineModel();
 		TFIDFModel tfidfModel = new TFIDFModel();
-		
+		SVDModel svdMode = new SVDModel();
 		//model.cluster(fileMap);
-		model.cluster(fileMap);
+		svdMode.cluster(fileMap);
 		//readXML();
 	}
 
