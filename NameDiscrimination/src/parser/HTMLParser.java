@@ -14,6 +14,7 @@ import net.htmlparser.jericho.*;
 
 
 public class HTMLParser {
+	static Stemmer stemmer = new Stemmer();
 	
 	public static void main(String[] args) throws IOException {
 //		File rawfile = new File("webps/web_pages/Abby_Watkins/raw/001/index.html");
@@ -33,9 +34,17 @@ public class HTMLParser {
 			String temp = te.toString();
 			resList = new ArrayList<String>();
 			String[] sentences = temp.split(" ");
-			for (String sentence: sentences) {
-				if (!sentence.equals(" "))
-					resList.add(sentence);
+			for (String word: sentences) {
+//				if (word.charAt(word.length()-1) == '.')
+//					System.out.print("");
+				if (!stemmer.isStop(word)) {
+					int length = word.length();
+					char last = word.charAt(length-1);
+					if (last == '.' || last == ',' || last == '!' || last == ';')
+						word = word.substring(0,length-1);
+					word = stemmer.stem(word.toLowerCase());
+					resList.add(word);
+				}
 			}
 		} catch (FileNotFoundException e) {
 			// TODO Auto-generated catch block
